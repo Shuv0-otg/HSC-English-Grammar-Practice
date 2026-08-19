@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC Board Synonyms & Antonyms (2015–2025)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --synonym-bg: rgba(16, 185, 129, 0.1);
+            --synonym-color: #059669;
+            --antonym-bg: rgba(239, 68, 68, 0.1);
+            --antonym-color: #dc2626;
+        }
+
+        [data-theme="dark"] {
+            --primary: #6366f1;
+            --primary-hover: #818cf8;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+            --synonym-bg: rgba(16, 185, 129, 0.2);
+            --synonym-color: #34d399;
+            --antonym-bg: rgba(239, 68, 68, 0.2);
+            --antonym-color: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Hind Siliguri', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #3730a3, #4f46e5);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .controls {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin: -25px auto 2rem;
+            position: relative;
+            z-index: 10;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .stats-bar {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Mode: Table View */
+        .word-table-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg);
+            padding: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .main-word {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .synonym-tag {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background: var(--synonym-bg);
+            color: var(--synonym-color);
+            font-weight: 600;
+        }
+
+        .antonym-tag {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background: var(--antonym-bg);
+            color: var(--antonym-color);
+            font-weight: 600;
+        }
+
+        /* Flashcard View */
+        .flashcard-wrapper {
+            display: none;
+            max-width: 500px;
+            margin: 2rem auto;
+            perspective: 1000px;
+        }
+
+        .flashcard {
+            width: 100%;
+            min-height: 280px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(145deg, var(--card-bg), var(--bg));
+        }
+
+        .flashcard-controls {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Quiz View */
+        .quiz-wrapper {
+            display: none;
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .quiz-word {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-opt-btn {
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .quiz-opt-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .quiz-opt-btn.correct {
+            background: var(--synonym-bg);
+            color: var(--synonym-color);
+            border-color: var(--synonym-color);
+        }
+
+        .quiz-opt-btn.wrong {
+            background: var(--antonym-bg);
+            color: var(--antonym-color);
+            border-color: var(--antonym-color);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5rem; }
+            .controls { flex-direction: column; }
+            .btn-group { width: 100%; justify-content: center; }
+            .search-box { width: 100%; }
+            .quiz-options { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </button>
+        <div class="container">
+            <h1>HSC Synonyms & Antonyms</h1>
+            <p>২০১৫ - ২০২৫ সালের সকল বোর্ড পরীক্ষার ইংরেজি শব্দভাণ্ডার</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <div class="search-box">
+                <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" id="searchInput" placeholder="যেকোনো শব্দ বা সমার্থক/বিপরীত শব্দ দিয়ে খুঁজুন...">
+            </div>
+            <div class="btn-group">
+                <button class="btn active" id="viewTableBtn" onclick="switchView('table')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M3 18h18M3 6h18"></path></svg>
+                    তালিকা
+                </button>
+                <button class="btn" id="viewCardBtn" onclick="switchView('flashcard')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    ফ্ল্যাশকার্ড
+                </button>
+                <button class="btn" id="viewQuizBtn" onclick="switchView('quiz')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    কুইজ (Quiz)
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-bar" id="statsBar">
+            মোট শব্দের সংখ্যা: <span id="totalCount">0</span> টি
+        </div>
+
+        <!-- Table View -->
+        <div class="word-table-container" id="tableView">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Main Word</th>
+                        <th>Synonym</th>
+                        <th>Antonym</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Flashcard View -->
+        <div class="flashcard-wrapper" id="flashcardWrapper">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="card-face card-front">
+                    <span style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">MAIN WORD</span>
+                    <h2 style="font-size:2.2rem; color:var(--primary);" id="fcWord">Word</h2>
+                    <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--text-muted);">(ক্লিক করে Synonym & Antonym দেখুন)</p>
+                </div>
+                <div class="card-face card-back">
+                    <div style="margin-bottom:1.2rem;">
+                        <span style="font-size:0.8rem; color:var(--text-muted); display:block;">SYNONYM</span>
+                        <span class="synonym-tag" style="font-size:1.2rem;" id="fcSyn">Synonym</span>
+                    </div>
+                    <div>
+                        <span style="font-size:0.8rem; color:var(--text-muted); display:block;">ANTONYM</span>
+                        <span class="antonym-tag" style="font-size:1.2rem;" id="fcAnt">Antonym</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard-controls" id="flashcardControls">
+            <button class="btn" onclick="prevCard()">◄ পূর্ববর্তী</button>
+            <span id="fcProgress" style="font-weight:600; color:var(--text-muted);">1 / 86</span>
+            <button class="btn" onclick="nextCard()">পরবর্তী ►</button>
+        </div>
+
+        <!-- Quiz View -->
+        <div class="quiz-wrapper" id="quizWrapper">
+            <div class="quiz-header">
+                <span>প্রশ্ন: <span id="quizIndex">1</span>/<span id="quizTotal">86</span></span>
+                <span id="quizScore" style="color:var(--primary);">স্কোর: 0</span>
+            </div>
+            <div style="text-align:center; font-size:0.9rem; color:var(--text-muted);" id="quizType">Select the correct Synonym for:</div>
+            <div class="quiz-word" id="quizWord">WORD</div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <button class="btn active" style="width:100%; justify-content:center; display:none;" id="nextQuizBtn" onclick="nextQuiz()">পরবর্তী প্রশ্ন ►</button>
+        </div>
+    </div>
+
+    <script>
+        const rawData = [
+            { id: 1, word: "Abolish", syn: "Cancel", ant: "Establish" },
+            { id: 2, word: "Affluent", syn: "Wealthy", ant: "Impoverished" },
+            { id: 3, word: "Alert", syn: "Aware", ant: "Unaware" },
+            { id: 4, word: "Ambition", syn: "Goal", ant: "Indifference" },
+            { id: 5, word: "Amicable", syn: "Cordial", ant: "Hostile" },
+            { id: 6, word: "Ancient", syn: "Antique", ant: "Modern" },
+            { id: 7, word: "Anger", syn: "Wrath", ant: "Calmness" },
+            { id: 8, word: "Appreciate", syn: "Admire", ant: "Depreciate" },
+            { id: 9, word: "Attentive", syn: "Mindful", ant: "Inattentive" },
+            { id: 10, word: "Augment", syn: "Increase", ant: "Reduce" },
+            { id: 11, word: "Aware", syn: "Conscious", ant: "Unaware" },
+            { id: 12, word: "Belief", syn: "Faith", ant: "Disbelief" },
+            { id: 13, word: "Benevolent", syn: "Generous", ant: "Malevolent" },
+            { id: 14, word: "Capable", syn: "Competent", ant: "Incompetent" },
+            { id: 15, word: "Candid", syn: "Frank", ant: "Deceitful" },
+            { id: 16, word: "Citizen", syn: "Resident", ant: "Foreigner" },
+            { id: 17, word: "Coarse", syn: "Rough", ant: "Smooth" },
+            { id: 18, word: "Conceal", syn: "Hide", ant: "Reveal" },
+            { id: 19, word: "Courteous", syn: "Polite", ant: "Discourteous" },
+            { id: 20, word: "Dark", syn: "Obscure", ant: "Bright" },
+            { id: 21, word: "Detrimental", syn: "Harmful", ant: "Beneficial" },
+            { id: 22, word: "Different", syn: "Distinct", ant: "Same" },
+            { id: 23, word: "Diligent", syn: "Industrious", ant: "Idle" },
+            { id: 24, word: "Discomfort", syn: "Unease", ant: "Comfort" },
+            { id: 25, word: "Eager", syn: "Willing", ant: "Unwilling" },
+            { id: 26, word: "Eradicate", syn: "Eliminate", ant: "Preserve" },
+            { id: 27, word: "Ethical", syn: "Moral", ant: "Unethical" },
+            { id: 28, word: "Fascinating", syn: "Mesmerizing", ant: "Boring" },
+            { id: 29, word: "Flawless", syn: "Perfect", ant: "Defective" },
+            { id: 30, word: "Fragile", syn: "Delicate", ant: "Strong" },
+            { id: 31, word: "Graceful", syn: "Elegant", ant: "Clumsy" },
+            { id: 32, word: "Grave", syn: "Serious", ant: "Cheerful" },
+            { id: 33, word: "Happiness", syn: "Joy", ant: "Unhappiness" },
+            { id: 34, word: "Hindrance", syn: "Obstacle", ant: "Assistance" },
+            { id: 35, word: "Ideal", syn: "Perfect", ant: "Practical" },
+            { id: 36, word: "Illogical", syn: "Irrational", ant: "Logical" },
+            { id: 37, word: "Immense", syn: "Huge", ant: "Tiny" },
+            { id: 38, word: "Impatient", syn: "Anxious", ant: "Patient" },
+            { id: 39, word: "Imperative", syn: "Essential", ant: "Optional" },
+            { id: 40, word: "Indifferent", syn: "Apathetic", ant: "Interested" },
+            { id: 41, word: "Indigenous", syn: "Native", ant: "Foreign" },
+            { id: 42, word: "Inherent", syn: "Innate", ant: "Acquired" },
+            { id: 43, word: "Insignificant", syn: "Trivial", ant: "Significant" },
+            { id: 44, word: "Instruction", syn: "Guidance", ant: "Misdirection" },
+            { id: 45, word: "Instructive", syn: "Educational", ant: "Misleading" },
+            { id: 46, word: "Latent", syn: "Hidden", ant: "Visible" },
+            { id: 47, word: "Launch", syn: "Start", ant: "Abandon" },
+            { id: 48, word: "Lethal", syn: "Deadly", ant: "Harmless" },
+            { id: 49, word: "Maintain", syn: "Preserve", ant: "Abandon" },
+            { id: 50, word: "Melancholy", syn: "Sorrowful", ant: "Cheerful" },
+            { id: 51, word: "Mighty", syn: "Powerful", ant: "Weak" },
+            { id: 52, word: "Mistake", syn: "Error", ant: "Accuracy" },
+            { id: 53, word: "Moral", syn: "Ethical", ant: "Immoral" },
+            { id: 54, word: "Notice", syn: "Observe", ant: "Ignore" },
+            { id: 55, word: "Obscure", syn: "Vague", ant: "Clear" },
+            { id: 56, word: "Optimum", syn: "Ideal", ant: "Worst" },
+            { id: 57, word: "Outer", syn: "External", ant: "Inner" },
+            { id: 58, word: "Pardon", syn: "Forgive", ant: "Punish" },
+            { id: 59, word: "Permanent", syn: "Lasting", ant: "Temporary" },
+            { id: 60, word: "Praise", syn: "Admire", ant: "Criticize" },
+            { id: 61, word: "Prohibit", syn: "Ban", ant: "Allow" },
+            { id: 62, word: "Prosperity", syn: "Affluence", ant: "Poverty" },
+            { id: 63, word: "Reliable", syn: "Trustworthy", ant: "Doubtful" },
+            { id: 64, word: "Reluctant", syn: "Unwilling", ant: "Eager" },
+            { id: 65, word: "Remove", syn: "Eliminate", ant: "Add" },
+            { id: 66, word: "Require", syn: "Demand", ant: "Option" },
+            { id: 67, word: "Robust", syn: "Sturdy", ant: "Weak" },
+            { id: 68, word: "Scarcity", syn: "Lack", ant: "Abundance" },
+            { id: 69, word: "Simple", syn: "Easy", ant: "Complex" },
+            { id: 70, word: "Slender", syn: "Thin", ant: "Chubby" },
+            { id: 71, word: "Solemn", syn: "Serious", ant: "Light" },
+            { id: 72, word: "Sophisticated", syn: "Advanced", ant: "Primitive" },
+            { id: 73, word: "Splendid", syn: "Magnificent", ant: "Dull" },
+            { id: 74, word: "Suffer", syn: "Endure", ant: "Enjoy" },
+            { id: 75, word: "Tranquil", syn: "Peaceful", ant: "Chaotic" },
+            { id: 76, word: "Transient", syn: "Fleeting", ant: "Permanent" },
+            { id: 77, word: "Unique", syn: "Distinctive", ant: "Common" },
+            { id: 78, word: "Vague", syn: "Unclear", ant: "Precise" },
+            { id: 79, word: "Valuable", syn: "Precious", ant: "Worthless" },
+            { id: 80, word: "Vanish", syn: "Disappear", ant: "Emerge" },
+            { id: 81, word: "Virtue", syn: "Goodness", ant: "Vice" },
+            { id: 82, word: "Vulnerable", syn: "Exposed", ant: "Safe" },
+            { id: 83, word: "Wisdom", syn: "Knowledge", ant: "Folly" },
+            { id: 84, word: "Worthless", syn: "Insignificant", ant: "Valuable" },
+            { id: 85, word: "Yield", syn: "Surrender", ant: "Resist" },
+            { id: 86, word: "Zeal", syn: "Passion", ant: "Apathy" }
+        ];
+
+        let filteredData = [...rawData];
+        let currentSearch = "";
+        let flashcardIndex = 0;
+        let quizIndex = 0;
+        let score = 0;
+
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const totalCount = document.getElementById('totalCount');
+        const tableView = document.getElementById('tableView');
+        const flashcardWrapper = document.getElementById('flashcardWrapper');
+        const flashcardControls = document.getElementById('flashcardControls');
+        const quizWrapper = document.getElementById('quizWrapper');
+        const themeToggle = document.getElementById('themeToggle');
+
+        function renderTable() {
+            tableBody.innerHTML = "";
+            if (filteredData.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="no-results">কোনো শব্দ পাওয়া যায়নি!</td></tr>`;
+                return;
+            }
+            filteredData.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="color:var(--text-muted); font-size:0.85rem;">#${item.id}</td>
+                    <td class="main-word">${item.word}</td>
+                    <td><span class="synonym-tag">${item.syn}</span></td>
+                    <td><span class="antonym-tag">${item.ant}</span></td>
+                `;
+                tableBody.appendChild(tr);
+            });
+            totalCount.innerText = filteredData.length;
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase();
+            filteredData = rawData.filter(item => 
+                item.word.toLowerCase().includes(currentSearch) ||
+                item.syn.toLowerCase().includes(currentSearch) ||
+                item.ant.toLowerCase().includes(currentSearch)
+            );
+            renderTable();
+            flashcardIndex = 0;
+            updateFlashcard();
+        });
+
+        function switchView(view) {
+            document.getElementById('viewTableBtn').classList.toggle('active', view === 'table');
+            document.getElementById('viewCardBtn').classList.toggle('active', view === 'flashcard');
+            document.getElementById('viewQuizBtn').classList.toggle('active', view === 'quiz');
+
+            tableView.style.display = view === 'table' ? 'block' : 'none';
+            flashcardWrapper.style.display = view === 'flashcard' ? 'block' : 'none';
+            flashcardControls.style.display = view === 'flashcard' ? 'flex' : 'none';
+            quizWrapper.style.display = view === 'quiz' ? 'block' : 'none';
+
+            if (view === 'flashcard') updateFlashcard();
+            if (view === 'quiz') startQuiz();
+        }
+
+        // Flashcards
+        function updateFlashcard() {
+            if (filteredData.length === 0) return;
+            const item = filteredData[flashcardIndex];
+            document.getElementById('flashcard').classList.remove('flipped');
+            setTimeout(() => {
+                document.getElementById('fcWord').innerText = item.word;
+                document.getElementById('fcSyn').innerText = item.syn;
+                document.getElementById('fcAnt').innerText = item.ant;
+                document.getElementById('fcProgress').innerText = `${flashcardIndex + 1} / ${filteredData.length}`;
+            }, 200);
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            if (filteredData.length === 0) return;
+            flashcardIndex = (flashcardIndex + 1) % filteredData.length;
+            updateFlashcard();
+        }
+
+        function prevCard() {
+            if (filteredData.length === 0) return;
+            flashcardIndex = (flashcardIndex - 1 + filteredData.length) % filteredData.length;
+            updateFlashcard();
+        }
+
+        // Quiz Mode
+        function startQuiz() {
+            quizIndex = 0;
+            score = 0;
+            document.getElementById('quizScore').innerText = `স্কোর: ${score}`;
+            showQuizQuestion();
+        }
+
+        function showQuizQuestion() {
+            const item = rawData[quizIndex];
+            const isSynonym = Math.random() > 0.5;
+            const correctAnswer = isSynonym ? item.syn : item.ant;
+
+            document.getElementById('quizIndex').innerText = quizIndex + 1;
+            document.getElementById('quizTotal').innerText = rawData.length;
+            document.getElementById('quizType').innerText = isSynonym ? "Select the correct SYNONYM for:" : "Select the correct ANTONYM for:";
+            document.getElementById('quizWord').innerText = item.word;
+            document.getElementById('nextQuizBtn').style.display = "none";
+
+            let options = [correctAnswer];
+            while (options.length < 4) {
+                const randomItem = rawData[Math.floor(Math.random() * rawData.length)];
+                const randomWord = isSynonym ? randomItem.syn : randomItem.ant;
+                if (!options.includes(randomWord)) options.push(randomWord);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = "";
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(btn, opt, correctAnswer);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selectedBtn, selectedOpt, correctOpt) {
+            const buttons = document.querySelectorAll('.quiz-opt-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedOpt === correctOpt) {
+                selectedBtn.classList.add('correct');
+                score++;
+                document.getElementById('quizScore').innerText = `স্কোর: ${score}`;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons.forEach(btn => {
+                    if (btn.innerText === correctOpt) btn.classList.add('correct');
+                });
+            }
+            document.getElementById('nextQuizBtn').style.display = "block";
+        }
+
+        function nextQuiz() {
+            quizIndex = (quizIndex + 1) % rawData.length;
+            showQuizQuestion();
+        }
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        });
+
+        // Initialize
+        renderTable();
+    </script>
+</body>
+</html>

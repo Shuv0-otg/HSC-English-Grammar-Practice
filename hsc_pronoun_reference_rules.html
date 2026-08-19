@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC English Pronoun Reference Rules (2015–2025)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --accent-bg: rgba(2, 132, 199, 0.08);
+            --rule-num-bg: #0284c7;
+            --rule-num-color: #ffffff;
+            --incorrect-bg: #fef2f2;
+            --incorrect-color: #dc2626;
+            --correct-bg: #f0fdf4;
+            --correct-color: #16a34a;
+            --shortcut-bg: #fefce8;
+            --shortcut-border: #eab308;
+        }
+
+        [data-theme="dark"] {
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+            --accent-bg: rgba(56, 189, 248, 0.15);
+            --rule-num-bg: #38bdf8;
+            --rule-num-color: #0f172a;
+            --incorrect-bg: rgba(220, 38, 38, 0.15);
+            --incorrect-color: #f87171;
+            --correct-bg: rgba(22, 163, 74, 0.15);
+            --correct-color: #4ade80;
+            --shortcut-bg: rgba(234, 179, 8, 0.15);
+            --shortcut-border: #facc15;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0c4a6e, #0284c7);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .controls {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin: -25px auto 2rem;
+            position: relative;
+            z-index: 10;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .stats-bar {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Shortcut Box */
+        .shortcut-card {
+            background: var(--shortcut-bg);
+            border-left: 5px solid var(--shortcut-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .shortcut-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .shortcut-list {
+            margin-left: 1.2rem;
+            font-size: 0.98rem;
+        }
+
+        .shortcut-list li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Rule Card */
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .rule-card:hover {
+            border-color: var(--primary);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .rule-num {
+            background: var(--rule-num-bg);
+            color: var(--rule-num-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .rule-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .rule-desc {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .example-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+        }
+
+        .ex-item {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.98rem;
+            font-weight: 500;
+        }
+
+        .ex-incorrect {
+            background: var(--incorrect-bg);
+            color: var(--incorrect-color);
+            border-left: 4px solid var(--incorrect-color);
+        }
+
+        .ex-correct {
+            background: var(--correct-bg);
+            color: var(--correct-color);
+            border-left: 4px solid var(--correct-color);
+        }
+
+        /* Flashcard View */
+        .flashcard-wrapper {
+            display: none;
+            max-width: 600px;
+            margin: 2rem auto;
+            perspective: 1000px;
+        }
+
+        .flashcard {
+            width: 100%;
+            min-height: 340px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(145deg, var(--card-bg), var(--bg));
+            text-align: left;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .flashcard-controls {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Quiz View */
+        .quiz-wrapper {
+            display: none;
+            max-width: 650px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            background: var(--accent-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-opt-btn {
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-family: inherit;
+            font-size: 0.98rem;
+        }
+
+        .quiz-opt-btn:hover {
+            border-color: var(--primary);
+            background: var(--accent-bg);
+        }
+
+        .quiz-opt-btn.correct {
+            background: rgba(22, 163, 74, 0.2);
+            color: var(--correct-color);
+            border-color: #16a34a;
+        }
+
+        .quiz-opt-btn.wrong {
+            background: rgba(220, 38, 38, 0.2);
+            color: var(--incorrect-color);
+            border-color: #dc2626;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .controls { flex-direction: column; }
+            .btn-group { width: 100%; justify-content: center; }
+            .search-box { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </button>
+        <div class="container">
+            <h1>HSC Pronoun Reference Master Guide</h1>
+            <p>২০১৫ - ২০২৫ সালের এইচএসসি বোর্ড পরীক্ষা থেকে প্রাপ্ত গুরুত্বপূর্ণ নিয়ম ও অ্যানালাইসিস</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <div class="search-box">
+                <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" id="searchInput" placeholder="যেকোনো নিয়ম, কীওয়ার্ড বা বাক্য দিয়ে খুঁজুন...">
+            </div>
+            <div class="btn-group">
+                <button class="btn active" id="viewListBtn" onclick="switchView('list')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                    রুলস তালিকা
+                </button>
+                <button class="btn" id="viewCardBtn" onclick="switchView('flashcard')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    ফ্ল্যাশকার্ড
+                </button>
+                <button class="btn" id="viewQuizBtn" onclick="switchView('quiz')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    কুইজ (Quiz)
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-bar" id="statsBar">
+            মোট নিয়ম পাওয়া গেছে: <span id="totalCount" style="color:var(--primary); font-weight:700;">6</span> টি
+        </div>
+
+        <!-- Shortcut Tip -->
+        <div class="shortcut-card" id="shortcutCard">
+            <div class="shortcut-title">
+                ⚡ শর্টকাট কৌশল (Exam Hack)
+            </div>
+            <ul class="shortcut-list">
+                <li>প্যাসেজের যেখানেই <strong>He, She, They, It, This, That, These, Which</strong> পাবেন, সেখানেই একবার থমকে যাবেন।</li>
+                <li>নিজেকে প্রশ্ন করুন— <em>"এই Pronoun-টি ঠিক কাকে বোঝাচ্ছে?"</em></li>
+                <li>উত্তর যদি একটিমাত্র Noun-কে স্পষ্ট না করে বা কনফিউজিং হয়, তবে Pronoun-টি কেটে সেখানে নির্দিষ্ট Noun-টি বসিয়ে দিন।</li>
+            </ul>
+        </div>
+
+        <!-- Rules List View -->
+        <div class="rules-list" id="listView"></div>
+
+        <!-- Flashcard View -->
+        <div class="flashcard-wrapper" id="flashcardWrapper">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="card-face card-front">
+                    <span style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; font-weight:700;">PRONOUN RULE</span>
+                    <h2 style="font-size:1.5rem; color:var(--primary); margin-bottom:1rem;" id="fcTitle">Rule Title</h2>
+                    <p style="font-size:0.9rem; color:var(--text-muted);">(ক্লিক করে ব্যাখ্যা ও উদাহরণ দেখুন)</p>
+                </div>
+                <div class="card-face card-back">
+                    <h3 style="font-size:1.2rem; color:var(--primary); margin-bottom:0.5rem;" id="fcBackTitle">Rule Title</h3>
+                    <p style="font-size:0.95rem; margin-bottom:0.8rem;" id="fcDesc">Description</p>
+                    <div style="width:100%; font-size:0.9rem;">
+                        <div class="ex-item ex-incorrect" id="fcIncorrect">Incorrect: ...</div>
+                        <div class="ex-item ex-correct" style="margin-top:0.4rem;" id="fcCorrect">Correct: ...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard-controls" id="flashcardControls">
+            <button class="btn" onclick="prevCard()">◄ পূর্ববর্তী</button>
+            <span id="fcProgress" style="font-weight:600; color:var(--text-muted);">1 / 6</span>
+            <button class="btn" onclick="nextCard()">পরবর্তী ►</button>
+        </div>
+
+        <!-- Quiz View -->
+        <div class="quiz-wrapper" id="quizWrapper">
+            <div class="quiz-header">
+                <span>প্রশ্ন: <span id="quizIndex">1</span>/<span id="quizTotal">6</span></span>
+                <span id="quizScore" style="color:var(--primary);">স্কোর: 0</span>
+            </div>
+            <div class="quiz-question" id="quizQuestion">Question goes here...</div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <button class="btn active" style="width:100%; justify-content:center; display:none;" id="nextQuizBtn" onclick="nextQuiz()">পরবর্তী প্রশ্ন ►</button>
+        </div>
+    </div>
+
+    <script>
+        const rulesData = [
+            {
+                id: 1,
+                title: "Unclear / Ambiguous Reference (অস্পষ্ট রেফারেন্স)",
+                desc: "বাক্যে যদি একাধিক Noun থাকে এবং পরবর্তীতে কোনো Pronoun ব্যবহার করা হয় যার ফলে কোন Noun-কে নির্দেশ করছে তা অস্পষ্ট হয়, তবে Pronoun-টির জায়গায় সরাসরি সঠিক Noun-টি বসাতে হয়।",
+                incorrect: "Rana told Jewel that he was right.",
+                correct: "Rana told Jewel that Rana / Jewel was right.",
+                quizQ: "Incorrect: Rana told Jewel that he was right. (How to fix 'he'?)",
+                quizOpts: ["Rana / Jewel", "They", "He himself", "It"],
+                correctOpt: "Rana / Jewel"
+            },
+            {
+                id: 2,
+                title: "Implied / Missing Reference (অনুপস্থিত রেফারেন্স)",
+                desc: "অনেক সময় প্যাসেজে মূল Noun-টি উহ্য থাকে কিন্তু সেটির Pronoun ব্যবহার করা হয়। সে ক্ষেত্রে Pronoun কেটে নির্দিষ্ট Noun-টি লিখতে হয়।",
+                incorrect: "In the exam hall, they should maintain silence.",
+                correct: "In the exam hall, the examinees / students should maintain silence.",
+                quizQ: "Incorrect: In the exam hall, they should maintain silence. (What is the clear Noun for 'they'?)",
+                quizOpts: ["the examinees / students", "he", "this", "people"],
+                correctOpt: "the examinees / students"
+            },
+            {
+                id: 3,
+                title: "Noun Adjunct & Demonstrative Pronoun (This / That / These / Those / It)",
+                desc: "বাক্যের শুরুতে বা মাঝে একা একা This, That, It বসে যদি পুরো বাক্য বা ধারণাকে নির্দেশ করে, তবে সেটির পর একটি Noun যোগ করতে হয় অথবা Noun লিখতে হয়।",
+                incorrect: "He works hard. This helps him succeed.",
+                correct: "He works hard. This habit / quality helps him succeed.",
+                quizQ: "Incorrect: He works hard. This helps him succeed. (Correction for 'This'?)",
+                quizOpts: ["This habit / quality", "These", "It", "Which"],
+                correctOpt: "This habit / quality"
+            },
+            {
+                id: 4,
+                title: "Subject-Pronoun Number & Gender Agreement (সংখ্যা ও লিঙ্গ পরিবর্তন)",
+                desc: "Noun যদি Singular হয় তবে Pronoun-ও Singular হবে; Noun যদি Plural হয় তবে Pronoun-ও Plural হবে।",
+                incorrect: "Books give us knowledge. It broadens our mind. / Every student should do their duty.",
+                correct: "Books give us knowledge. They broaden our mind. / Every student should do his/her duty.",
+                quizQ: "Incorrect: Books give us knowledge. It broadens our mind. (Correction for 'It'?)",
+                quizOpts: ["They", "This", "He", "Which"],
+                correctOpt: "They"
+            },
+            {
+                id: 5,
+                title: "Relative Pronoun Agreement (Who / Which / That / Whom / Whose)",
+                desc: "ব্যক্তির ক্ষেত্রে Who / Whom / Whose এবং বস্তু, প্রাণী বা অবচেতন বিষয়ের ক্ষেত্রে Which / That ব্যবহৃত হয়।",
+                incorrect: "The book who you gave me is lost.",
+                correct: "The book which / that you gave me is lost.",
+                quizQ: "Incorrect: The book who you gave me is lost. (Correction for 'who'?)",
+                quizOpts: ["which / that", "whom", "whose", "where"],
+                correctOpt: "which / that"
+            },
+            {
+                id: 6,
+                title: "Singular Noun With Plural Meaning Confusion",
+                desc: "Society, Government, Authority, People, Youth, Mankind, Student life—এদের ক্ষেত্রে সঠিক Pronoun নির্বাচন করতে হয়।",
+                incorrect: "Society has some rules. We must obey them. (Here society is singular context)",
+                correct: "Society has some rules. We must obey the rules / society's rules.",
+                quizQ: "Incorrect: Society has some rules. We must obey them. (Best correction?)",
+                quizOpts: ["the rules / society's rules", "it", "they", "those"],
+                correctOpt: "the rules / society's rules"
+            }
+        ];
+
+        let filteredRules = [...rulesData];
+        let flashcardIndex = 0;
+        let quizIndex = 0;
+        let score = 0;
+
+        const listView = document.getElementById('listView');
+        const searchInput = document.getElementById('searchInput');
+        const totalCount = document.getElementById('totalCount');
+        const flashcardWrapper = document.getElementById('flashcardWrapper');
+        const flashcardControls = document.getElementById('flashcardControls');
+        const quizWrapper = document.getElementById('quizWrapper');
+        const shortcutCard = document.getElementById('shortcutCard');
+        const themeToggle = document.getElementById('themeToggle');
+
+        function renderRules() {
+            listView.innerHTML = "";
+            if (filteredRules.length === 0) {
+                listView.innerHTML = `<div class="no-results">কোনো মিল পাওয়া যায়নি! সঠিক শব্দ বা রুলস নাম দিয়ে সার্চ করুন।</div>`;
+                return;
+            }
+
+            filteredRules.forEach((rule) => {
+                const card = document.createElement('div');
+                card.className = 'rule-card';
+                card.innerHTML = `
+                    <div class="rule-header">
+                        <div class="rule-num">${rule.id}</div>
+                        <div class="rule-title">${rule.title}</div>
+                    </div>
+                    <div class="rule-desc">${rule.desc}</div>
+                    <div class="example-box">
+                        <div class="ex-item ex-incorrect"><strong>Incorrect:</strong> ${rule.incorrect}</div>
+                        <div class="ex-item ex-correct"><strong>Correct:</strong> ${rule.correct}</div>
+                    </div>
+                `;
+                listView.appendChild(card);
+            });
+            totalCount.innerText = filteredRules.length;
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            filteredRules = rulesData.filter(r => 
+                r.title.toLowerCase().includes(val) ||
+                r.desc.toLowerCase().includes(val) ||
+                r.incorrect.toLowerCase().includes(val) ||
+                r.correct.toLowerCase().includes(val)
+            );
+            renderRules();
+            flashcardIndex = 0;
+            updateFlashcard();
+        });
+
+        function switchView(view) {
+            document.getElementById('viewListBtn').classList.toggle('active', view === 'list');
+            document.getElementById('viewCardBtn').classList.toggle('active', view === 'flashcard');
+            document.getElementById('viewQuizBtn').classList.toggle('active', view === 'quiz');
+
+            listView.style.display = view === 'list' ? 'flex' : 'none';
+            shortcutCard.style.display = view === 'list' ? 'block' : 'none';
+            flashcardWrapper.style.display = view === 'flashcard' ? 'block' : 'none';
+            flashcardControls.style.display = view === 'flashcard' ? 'flex' : 'none';
+            quizWrapper.style.display = view === 'quiz' ? 'block' : 'none';
+
+            if (view === 'flashcard') updateFlashcard();
+            if (view === 'quiz') startQuiz();
+        }
+
+        // Flashcards
+        function updateFlashcard() {
+            if (filteredRules.length === 0) return;
+            const item = filteredRules[flashcardIndex];
+            document.getElementById('flashcard').classList.remove('flipped');
+            setTimeout(() => {
+                document.getElementById('fcTitle').innerText = item.title;
+                document.getElementById('fcBackTitle').innerText = item.title;
+                document.getElementById('fcDesc').innerText = item.desc;
+                document.getElementById('fcIncorrect').innerText = "Incorrect: " + item.incorrect;
+                document.getElementById('fcCorrect').innerText = "Correct: " + item.correct;
+                document.getElementById('fcProgress').innerText = `${flashcardIndex + 1} / ${filteredRules.length}`;
+            }, 200);
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            if (filteredRules.length === 0) return;
+            flashcardIndex = (flashcardIndex + 1) % filteredRules.length;
+            updateFlashcard();
+        }
+
+        function prevCard() {
+            if (filteredRules.length === 0) return;
+            flashcardIndex = (flashcardIndex - 1 + filteredRules.length) % filteredRules.length;
+            updateFlashcard();
+        }
+
+        // Quiz
+        function startQuiz() {
+            quizIndex = 0;
+            score = 0;
+            document.getElementById('quizScore').innerText = `স্কোর: ${score}`;
+            showQuizQuestion();
+        }
+
+        function showQuizQuestion() {
+            const item = rulesData[quizIndex];
+            document.getElementById('quizIndex').innerText = quizIndex + 1;
+            document.getElementById('quizTotal').innerText = rulesData.length;
+            document.getElementById('quizQuestion').innerText = item.quizQ;
+            document.getElementById('nextQuizBtn').style.display = "none";
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = "";
+
+            item.quizOpts.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(btn, opt, item.correctOpt);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selectedBtn, selectedOpt, correctOpt) {
+            const buttons = document.querySelectorAll('.quiz-opt-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedOpt === correctOpt) {
+                selectedBtn.classList.add('correct');
+                score++;
+                document.getElementById('quizScore').innerText = `স্কোর: ${score}`;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons.forEach(btn => {
+                    if (btn.innerText === correctOpt) btn.classList.add('correct');
+                });
+            }
+            document.getElementById('nextQuizBtn').style.display = "block";
+        }
+
+        function nextQuiz() {
+            quizIndex = (quizIndex + 1) % rulesData.length;
+            showQuizQuestion();
+        }
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        });
+
+        // Initialize
+        renderRules();
+    </script>
+</body>
+</html>
