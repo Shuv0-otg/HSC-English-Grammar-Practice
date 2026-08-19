@@ -204,9 +204,80 @@
             transform: translateX(3px);
         }
 
+        .credits {
+            margin-top: 3rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+        }
+
+        .credits h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .credit-block {
+            display: flex;
+            gap: 0.9rem;
+            align-items: flex-start;
+        }
+
+        .credit-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: var(--accent-bg);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .credit-role {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .credit-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0.15rem 0 0.25rem;
+        }
+
+        .credit-detail {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .credit-detail a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .credit-detail a:hover {
+            color: var(--primary);
+        }
+
         footer {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 2rem;
             color: var(--text-muted);
             font-size: 0.85rem;
         }
@@ -228,7 +299,7 @@
     <div class="container">
         <div class="stats-bar">
             <div>
-                <div class="stat-num">5</div>
+                <div class="stat-num">7</div>
                 <div class="stat-label">Topics</div>
             </div>
             <div>
@@ -288,6 +359,53 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </div>
             </a>
+
+            <a class="topic-card" href="hsc_changing_sentences_rules.html">
+                <div class="topic-icon">🔄</div>
+                <h3>Changing Sentences</h3>
+                <p>Master guide to sentence transformation rules — Assertive, Interrogative, Exclamatory, and more.</p>
+                <div class="go">Start practicing
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </div>
+            </a>
+
+            <a class="topic-card" href="hsc_sentence_connectors_rules.html">
+                <div class="topic-icon">🧷</div>
+                <h3>Sentence Connectors</h3>
+                <p>Rules for connecting sentences correctly, with board practice from 2010–2025.</p>
+                <div class="go">Start practicing
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </div>
+            </a>
+        </div>
+
+        <div class="credits">
+            <h4>Credits</h4>
+            <div class="credits-grid">
+                <div class="credit-block">
+                    <div class="credit-icon">✍️</div>
+                    <div>
+                        <div class="credit-role">Writer</div>
+                        <div class="credit-name">Mohiuddin Shafin</div>
+                        <div class="credit-detail">
+                            B.A and M.A in English Language and Literature<br>
+                            College Lecturer<br>
+                            <a href="tel:01843664870">01843664870</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="credit-block">
+                    <div class="credit-icon">💻</div>
+                    <div>
+                        <div class="credit-role">Developer</div>
+                        <div class="credit-name">Shuvvu</div>
+                        <div class="credit-detail">
+                            Development contributors: GitHub, Claude, Gemini
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer>
