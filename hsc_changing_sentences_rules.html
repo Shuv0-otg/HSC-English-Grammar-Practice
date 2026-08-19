@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+    <script>
+        (function () {
+            var savedTheme = localStorage.getItem('hsc-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme-pending', 'dark');
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSC Changing Sentences Rules Master Guide</title>
@@ -468,6 +476,7 @@
     </style>
 </head>
 <body>
+    <script>if (document.documentElement.getAttribute('data-theme-pending') === 'dark') { document.body.setAttribute('data-theme', 'dark'); }</script>
 
     <header>
         <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
@@ -502,7 +511,7 @@
         </div>
 
         <div class="stats-bar" id="statsBar">
-            মোট ক্যাটাগরি পাওয়া গেছে: <span id="totalCount" style="color:var(--primary); font-weight:700;">6</span> টি
+            মোট ক্যাটাগরি পাওয়া গেছে: <span id="totalCount" style="color:var(--primary); font-weight:700;">6</span> টি
         </div>
 
         <!-- Shortcut Tip -->
@@ -512,7 +521,7 @@
             </div>
             <ul class="shortcut-list">
                 <li><strong>Simple-Complex-Compound:</strong> Simple-এ 'In spite of' থাকলে Complex-এ 'Though' এবং Compound-এ 'but' ব্যবহৃত হয়।</li>
-                <li><strong>Affirmative-Negative:</strong> 'Only' ব্যক্তির ক্ষেত্রে 'None but', বস্তুর ক্ষেত্রে 'Nothing but' এবং সংখ্যার ক্ষেত্রে 'Not more than' হয়।</li>
+                <li><strong>Affirmative-Negative:</strong> 'Only' ব্যক্তির ক্ষেত্রে 'None but', বস্তুর ক্ষেত্রে 'Nothing but' এবং সংখ্যার ক্ষেত্রে 'Not more than' হয়।</li>
                 <li><strong>Voice Change:</strong> Modal Auxiliaries (can, could, may, must) থাকলে Passive-এ Modal + be + V3 বসে।</li>
             </ul>
         </div>
@@ -689,7 +698,7 @@
         function renderRules() {
             listView.innerHTML = "";
             if (filteredData.length === 0) {
-                listView.innerHTML = `<div class="no-results">কোনো মিল পাওয়া যায়নি! সঠিক শব্দ বা নিয়মের নাম দিয়ে সার্চ করুন।</div>`;
+                listView.innerHTML = `<div class="no-results">কোনো মিল পাওয়া যায়নি! সঠিক শব্দ বা নিয়মের নাম দিয়ে সার্চ করুন।</div>`;
                 return;
             }
 
@@ -889,7 +898,9 @@
         // Theme Toggle
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.getAttribute('data-theme') === 'dark';
-            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('hsc-theme', newTheme);
         });
 
         // Initialize

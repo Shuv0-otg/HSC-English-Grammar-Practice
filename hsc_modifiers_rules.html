@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+    <script>
+        (function () {
+            var savedTheme = localStorage.getItem('hsc-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme-pending', 'dark');
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSC English Modifiers Rules (2015–2025)</title>
@@ -417,6 +425,7 @@
     </style>
 </head>
 <body>
+    <script>if (document.documentElement.getAttribute('data-theme-pending') === 'dark') { document.body.setAttribute('data-theme', 'dark'); }</script>
 
     <header>
         <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
@@ -424,7 +433,7 @@
         </button>
         <div class="container">
             <h1>HSC Modifiers Master Guide</h1>
-            <p>২০১৫ - ২০২৫ সালের এইচএসসি বোর্ড পরীক্ষা থেকে পাওয়া ১০টি মূল রুলস ও প্র্যাকটিস</p>
+            <p>২০১৫ - ২০২৫ সালের এইচএসসি বোর্ড পরীক্ষা থেকে পাওয়া ১০টি মূল রুলস ও প্র্যাকটিস</p>
         </div>
     </header>
 
@@ -432,7 +441,7 @@
         <div class="controls">
             <div class="search-box">
                 <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <input type="text" id="searchInput" placeholder="যেকোনো নিয়ম, কীওয়ার্ড বা উদাহরণ দিয়ে খুঁজুন...">
+                <input type="text" id="searchInput" placeholder="যেকোনো নিয়ম, কীওয়ার্ড বা উদাহরণ দিয়ে খুঁজুন...">
             </div>
             <div class="btn-group">
                 <button class="btn active" id="viewListBtn" onclick="switchView('list')">
@@ -451,7 +460,7 @@
         </div>
 
         <div class="stats-bar" id="statsBar">
-            মোট নিয়ম পাওয়া গেছে: <span id="totalCount" style="color:var(--primary); font-weight:700;">10</span> টি
+            মোট নিয়ম পাওয়া গেছে: <span id="totalCount" style="color:var(--primary); font-weight:700;">10</span> টি
         </div>
 
         <!-- Rules List View -->
@@ -550,7 +559,7 @@
             {
                 id: 6,
                 title: "Use an appositive / Post-modify the noun with an appositive",
-                desc: "কোনো Noun সম্পর্কে অতিরিক্ত তথ্য দেওয়া। এটি একটি Noun Phrase হয়, যেখানে কোনো Finite Verb থাকে না।",
+                desc: "কোনো Noun সম্পর্কে অতিরিক্ত তথ্য দেওয়া। এটি একটি Noun Phrase হয়, যেখানে কোনো Finite Verb থাকে না।",
                 pattern: "Noun, [Noun Phrase], Verb",
                 question: "Kazi Nazrul Islam, (use an appositive), wrote many poems.",
                 answer: "our national poet / a great rebel poet",
@@ -615,7 +624,7 @@
         function renderRules() {
             listView.innerHTML = "";
             if (filteredRules.length === 0) {
-                listView.innerHTML = `<div class="no-results">কোনো মিল পাওয়া যায়নি! সঠিক শব্দ বা রুলস নাম দিয়ে সার্চ করুন।</div>`;
+                listView.innerHTML = `<div class="no-results">কোনো মিল পাওয়া যায়নি! সঠিক শব্দ বা রুলস নাম দিয়ে সার্চ করুন।</div>`;
                 return;
             }
 
@@ -751,8 +760,9 @@
         // Theme Toggle
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.getAttribute('data-theme') === 'dark';
-            document.body.value = isDark ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('hsc-theme', newTheme);
         });
 
         // Initialize

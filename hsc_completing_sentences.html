@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+    <script>
+        (function () {
+            var savedTheme = localStorage.getItem('hsc-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme-pending', 'dark');
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSC Completing Sentences (2015-2025)</title>
@@ -380,6 +388,7 @@
     </style>
 </head>
 <body>
+    <script>if (document.documentElement.getAttribute('data-theme-pending') === 'dark') { document.body.setAttribute('data-theme', 'dark'); }</script>
 
     <header>
         <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
@@ -395,7 +404,7 @@
         <div class="controls">
             <div class="search-box">
                 <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <input type="text" id="searchInput" placeholder="কীওয়ার্ড বা নিয়ম দিয়ে খুঁজুন (e.g. Unless, Scarcely, High time)...">
+                <input type="text" id="searchInput" placeholder="কীওয়ার্ড বা নিয়ম দিয়ে খুঁজুন (e.g. Unless, Scarcely, High time)...">
             </div>
             <div class="btn-group">
                 <button class="btn active" id="viewAllBtn" onclick="switchView('grid')">
@@ -532,7 +541,7 @@
         function renderGrid() {
             sentenceGrid.innerHTML = "";
             if (filteredData.length === 0) {
-                sentenceGrid.innerHTML = `<div class="no-results">কোনো বাক্য পাওয়া যায়নি!</div>`;
+                sentenceGrid.innerHTML = `<div class="no-results">কোনো বাক্য পাওয়া যায়নি!</div>`;
                 return;
             }
             filteredData.forEach(item => {
@@ -652,7 +661,9 @@
         // Theme Toggle
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.getAttribute('data-theme') === 'dark';
-            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('hsc-theme', newTheme);
         });
 
         // Initialize
