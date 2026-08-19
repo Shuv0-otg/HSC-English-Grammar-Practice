@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC Changing Sentences Rules Master Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --accent-bg: rgba(2, 132, 199, 0.08);
+            --rule-num-bg: #0284c7;
+            --rule-num-color: #ffffff;
+            --subcard-bg: #f1f5f9;
+            --shortcut-bg: #fefce8;
+            --shortcut-border: #eab308;
+            --correct-bg: #f0fdf4;
+            --correct-color: #16a34a;
+            --incorrect-bg: #fef2f2;
+            --incorrect-color: #dc2626;
+        }
+
+        [data-theme="dark"] {
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+            --accent-bg: rgba(56, 189, 248, 0.15);
+            --rule-num-bg: #38bdf8;
+            --rule-num-color: #0f172a;
+            --subcard-bg: #0f172a;
+            --shortcut-bg: rgba(234, 179, 8, 0.15);
+            --shortcut-border: #facc15;
+            --correct-bg: rgba(22, 163, 74, 0.15);
+            --correct-color: #4ade80;
+            --incorrect-bg: rgba(220, 38, 38, 0.15);
+            --incorrect-color: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0c4a6e, #0284c7);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .controls {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin: -25px auto 2rem;
+            position: relative;
+            z-index: 10;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .stats-bar {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Shortcut Box */
+        .shortcut-card {
+            background: var(--shortcut-bg);
+            border-left: 5px solid var(--shortcut-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .shortcut-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .shortcut-list {
+            margin-left: 1.2rem;
+            font-size: 0.98rem;
+        }
+
+        .shortcut-list li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Rule Card */
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .rule-card:hover {
+            border-color: var(--primary);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .rule-num {
+            background: var(--rule-num-bg);
+            color: var(--rule-num-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .rule-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .sub-category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sub-category-item {
+            background: var(--subcard-bg);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border);
+        }
+
+        .sub-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
+        }
+
+        .rule-detail {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+
+        .meaning-text {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-top: 0.3rem;
+            font-weight: 500;
+        }
+
+        /* Table Styling */
+        .struct-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .struct-table th, .struct-table td {
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .struct-table th {
+            background: var(--accent-bg);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Flashcard View */
+        .flashcard-wrapper {
+            display: none;
+            max-width: 600px;
+            margin: 2rem auto;
+            perspective: 1000px;
+        }
+
+        .flashcard {
+            width: 100%;
+            min-height: 360px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(145deg, var(--card-bg), var(--bg));
+            text-align: left;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .flashcard-controls {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Quiz View */
+        .quiz-wrapper {
+            display: none;
+            max-width: 650px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            background: var(--accent-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-opt-btn {
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-family: inherit;
+            font-size: 0.98rem;
+        }
+
+        .quiz-opt-btn:hover {
+            border-color: var(--primary);
+            background: var(--accent-bg);
+        }
+
+        .quiz-opt-btn.correct {
+            background: rgba(22, 163, 74, 0.2);
+            color: var(--correct-color);
+            border-color: #16a34a;
+        }
+
+        .quiz-opt-btn.wrong {
+            background: rgba(220, 38, 38, 0.2);
+            color: var(--incorrect-color);
+            border-color: #dc2626;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .controls { flex-direction: column; }
+            .btn-group { width: 100%; justify-content: center; }
+            .search-box { width: 100%; }
+            .struct-table { font-size: 0.85rem; }
+            .struct-table th, .struct-table td { padding: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </button>
+        <div class="container">
+            <h1>HSC Changing Sentences Master Guide</h1>
+            <p>Transformation of Sentences - বোর্ড পরীক্ষার মূল রুলস ও শর্টকাট কৌশল</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <div class="search-box">
+                <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" id="searchInput" placeholder="যেকোনো নিয়ম, Simple, Complex বা Voice খুঁজুন...">
+            </div>
+            <div class="btn-group">
+                <button class="btn active" id="viewListBtn" onclick="switchView('list')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                    রুলস তালিকা
+                </button>
+                <button class="btn" id="viewCardBtn" onclick="switchView('flashcard')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    ফ্ল্যাশকার্ড
+                </button>
+                <button class="btn" id="viewQuizBtn" onclick="switchView('quiz')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    কুইজ (Quiz)
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-bar" id="statsBar">
+            মোট ক্যাটাগরি পাওয়া গেছে: <span id="totalCount" style="color:var(--primary); font-weight:700;">6</span> টি
+        </div>
+
+        <!-- Shortcut Tip -->
+        <div class="shortcut-card" id="shortcutCard">
+            <div class="shortcut-title">
+                ⚡ শর্টকাট কৌশল (Transformation Hacks)
+            </div>
+            <ul class="shortcut-list">
+                <li><strong>Simple-Complex-Compound:</strong> Simple-এ 'In spite of' থাকলে Complex-এ 'Though' এবং Compound-এ 'but' ব্যবহৃত হয়।</li>
+                <li><strong>Affirmative-Negative:</strong> 'Only' ব্যক্তির ক্ষেত্রে 'None but', বস্তুর ক্ষেত্রে 'Nothing but' এবং সংখ্যার ক্ষেত্রে 'Not more than' হয়।</li>
+                <li><strong>Voice Change:</strong> Modal Auxiliaries (can, could, may, must) থাকলে Passive-এ Modal + be + V3 বসে।</li>
+            </ul>
+        </div>
+
+        <!-- Rules List View -->
+        <div class="rules-list" id="listView"></div>
+
+        <!-- Flashcard View -->
+        <div class="flashcard-wrapper" id="flashcardWrapper">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="card-face card-front">
+                    <span style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; font-weight:700;">TRANSFORMATION CATEGORY</span>
+                    <h2 style="font-size:1.5rem; color:var(--primary); margin-bottom:1rem;" id="fcTitle">Rule Title</h2>
+                    <p style="font-size:0.9rem; color:var(--text-muted);">(ক্লিক করে বিস্তারিত রুলস দেখুন)</p>
+                </div>
+                <div class="card-face card-back">
+                    <h3 style="font-size:1.2rem; color:var(--primary); margin-bottom:1rem;" id="fcBackTitle">Rule Title</h3>
+                    <div style="width:100%; font-size:0.95rem;" id="fcContent">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard-controls" id="flashcardControls">
+            <button class="btn" onclick="prevCard()">◄ পূর্ববর্তী</button>
+            <span id="fcProgress" style="font-weight:600; color:var(--text-muted);">1 / 6</span>
+            <button class="btn" onclick="nextCard()">পরবর্তী ►</button>
+        </div>
+
+        <!-- Quiz View -->
+        <div class="quiz-wrapper" id="quizWrapper">
+            <div class="quiz-header">
+                <span>প্রশ্ন: <span id="quizIndex">1</span>/<span id="quizTotal">5</span></span>
+                <span id="quizScore" style="color:var(--primary);">স্কোর: 0</span>
+            </div>
+            <div class="quiz-question" id="quizQuestion">Question goes here...</div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <button class="btn active" style="width:100%; justify-content:center; display:none;" id="nextQuizBtn" onclick="nextQuiz()">পরবর্তী প্রশ্ন ►</button>
+        </div>
+    </div>
+
+    <script>
+        const changingRulesData = [
+            {
+                id: 1,
+                title: "Structural Change (Simple - Complex - Compound)",
+                type: "table",
+                rows: [
+                    { context: "১. সময় বোঝালে", simple: "At the time of / In / During + Noun", complex: "When / As + Clause", compound: "Clause + and + Clause" },
+                    { context: "২. কারণ বোঝালে", simple: "Because of / Due to / Owing to + V-ing", complex: "Since / As / Because + Clause", compound: "Clause + so / and so + Clause" },
+                    { context: "৩. শর্ত (হ্যাঁ-বাচক)", simple: "By + V-ing", complex: "If + Affirmative Clause", compound: "Imperative + and + Clause" },
+                    { context: "৪. শর্ত (না-বাচক)", simple: "Without + V-ing", complex: "If + Negative Clause / Unless", compound: "Imperative + or + Clause" },
+                    { context: "৫. উদ্দেশ্য বোঝালে", simple: "To / In order to + V-1", complex: "So that / In order that + Sub + can/could", compound: "Clause + and / and so + Clause" },
+                    { context: "৬. সত্ত্বেও (স্বার্থবিরোধী)", simple: "In spite of / Despite + Possessive + V-ing", complex: "Though / Although + Clause", compound: "Clause + but + Clause" },
+                    { context: "৭. ব্যক্তি/বস্তু বোঝালে", simple: "Noun + Adjective / Participle", complex: "Noun + Who / Which / That..", compound: "Independent Clauses joined by and" }
+                ],
+                quizQ: "'In spite of his working hard, he failed.' - Complex বাক্য কোনটি সঠিক?",
+                quizOpts: [
+                    "Though he worked hard, he failed.",
+                    "He worked hard and failed.",
+                    "He worked hard so he failed.",
+                    "Since he worked hard, he failed."
+                ],
+                correctOpt: "Though he worked hard, he failed."
+            },
+            {
+                id: 2,
+                title: "Voice Change (Active - Passive)",
+                type: "list",
+                subs: [
+                    { subTitle: "সাধারণ নিয়ম", detail: "Active-এর Object → Subject + Tense অনুযায়ী Auxiliary Verb + V_3 + Preposition (by/with/at/to) + Subject → Object।" },
+                    { subTitle: "Modal Auxiliaries (can, could, may, must, should)", detail: "Modal + be + V_3।" },
+                    { subTitle: "Interrogative Voice", detail: "Who থাকলে 'By whom' এবং Whom থাকলে 'Who' দিয়ে শুরু করতে হয়।" },
+                    { subTitle: "Impersonal Active", detail: "Subject উহ্য থাকলে ধরে নিয়ে Passive করতে হয় (e.g., Paper was invented in China → People invented paper in China)।" }
+                ],
+                quizQ: "'Who wrote the book?' - Passive Voice কোনটি সঠিক?",
+                quizOpts: [
+                    "By whom was the book written?",
+                    "Who was the book written by?",
+                    "By whom the book was written?",
+                    "Whom was written the book?"
+                ],
+                correctOpt: "By whom was the book written?"
+            },
+            {
+                id: 3,
+                title: "Degree of Comparison (Positive, Comparative, Superlative)",
+                type: "list",
+                subs: [
+                    { subTitle: "১. Superlative (The best)", detail: "Comparative: Better than any other / all other | Positive: No other ... as/so good as" },
+                    { subTitle: "২. Superlative (One of the best)", detail: "Comparative: Better than most other / few other | Positive: Very few ... as/so good as" }
+                ],
+                quizQ: "'Dhaka is bigger than any other city in Bangladesh.' - Positive Form কোনটি?",
+                quizOpts: [
+                    "No other city in Bangladesh is as big as Dhaka.",
+                    "Very few cities in Bangladesh are as big as Dhaka.",
+                    "Dhaka is as big as any other city.",
+                    "No other city was as big as Dhaka."
+                ],
+                correctOpt: "No other city in Bangladesh is as big as Dhaka."
+            },
+            {
+                id: 4,
+                title: "Affirmative - Negative Transformation",
+                type: "list",
+                subs: [
+                    { subTitle: "Only / Alone (ব্যক্তি)", detail: "None but" },
+                    { subTitle: "Only / Alone (বস্তু)", detail: "Nothing but" },
+                    { subTitle: "Only (বয়স/সংখ্যা)", detail: "Not more than / Not less than" },
+                    { subTitle: "Must / Have to", detail: "Cannot but + V_1 অথবা Cannot help + (V_1+ing)" },
+                    { subTitle: "Every + Noun", detail: "There is no + Noun + but / who does not" },
+                    { subTitle: "As soon as", detail: "No sooner had + Sub + V_3 + than + Clause" }
+                ],
+                quizQ: "'I must go there.' - Negative বাক্য কোনটি সঠিক?",
+                quizOpts: [
+                    "I cannot but go there.",
+                    "I cannot help go there.",
+                    "I must not go there.",
+                    "I do not have to go there."
+                ],
+                correctOpt: "I cannot but go there."
+            },
+            {
+                id: 5,
+                title: "Assertive - Interrogative",
+                type: "list",
+                subs: [
+                    { subTitle: "সাধারণ নিয়ম", detail: "বাক্য হা-বাচক থাকলে না-বাচক ইন্টারোগেটিভ করতে হয়।" },
+                    { subTitle: "Every / Everyone / Everybody / All", detail: "Who does not + Verb / Is there any ... who does not" },
+                    { subTitle: "Nobody / No one / None", detail: "Who + Affirmative Verb" }
+                ],
+                quizQ: "'Nobody believes a liar.' - Interrogative কোনটি সঠিক?",
+                quizOpts: [
+                    "Who believes a liar?",
+                    "Who does not believe a liar?",
+                    "Does anybody believe a liar?",
+                    "Who is believing a liar?"
+                ],
+                correctOpt: "Who believes a liar?"
+            },
+            {
+                id: 6,
+                title: "Assertive - Exclamatory",
+                type: "list",
+                subs: [
+                    { subTitle: "Very / Great যুক্ত বাক্য", detail: "What a/an (Noun থাকলে) অথবা How (Adjective থাকলে) দিয়ে শুরু করতে হয়।" },
+                    { subTitle: "I wish যুক্ত বাক্য", detail: "If / Would that দিয়ে বাক্য শুরু করতে হয়।" }
+                ],
+                quizQ: "'It is a very beautiful bird.' - Exclamatory কোনটি সঠিক?",
+                quizOpts: [
+                    "What a beautiful bird it is!",
+                    "How a beautiful bird it is!",
+                    "What beautiful bird it is!",
+                    "How beautiful bird it is!"
+                ],
+                correctOpt: "What a beautiful bird it is!"
+            }
+        ];
+
+        let filteredData = [...changingRulesData];
+        let flashcardIndex = 0;
+        let quizIndex = 0;
+        let score = 0;
+
+        const listView = document.getElementById('listView');
+        const searchInput = document.getElementById('searchInput');
+        const totalCount = document.getElementById('totalCount');
+        const flashcardWrapper = document.getElementById('flashcardWrapper');
+        const flashcardControls = document.getElementById('flashcardControls');
+        const quizWrapper = document.getElementById('quizWrapper');
+        const shortcutCard = document.getElementById('shortcutCard');
+        const themeToggle = document.getElementById('themeToggle');
+
+        function renderRules() {
+            listView.innerHTML = "";
+            if (filteredData.length === 0) {
+                listView.innerHTML = `<div class="no-results">কোনো মিল পাওয়া যায়নি! সঠিক শব্দ বা নিয়মের নাম দিয়ে সার্চ করুন।</div>`;
+                return;
+            }
+
+            filteredData.forEach((rule) => {
+                const card = document.createElement('div');
+                card.className = 'rule-card';
+                
+                let contentHtml = "";
+
+                if (rule.type === "table") {
+                    let rowsHtml = rule.rows.map(r => `
+                        <tr>
+                            <td><strong>${r.context}</strong></td>
+                            <td>${r.simple}</td>
+                            <td>${r.complex}</td>
+                            <td>${r.compound}</td>
+                        </tr>
+                    `).join('');
+
+                    contentHtml = `
+                        <div style="overflow-x:auto;">
+                            <table class="struct-table">
+                                <thead>
+                                    <tr>
+                                        <th>ধরন</th>
+                                        <th>Simple</th>
+                                        <th>Complex</th>
+                                        <th>Compound</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rowsHtml}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                } else {
+                    let subsHtml = rule.subs.map(sub => `
+                        <div class="sub-category-item">
+                            <div class="sub-title">${sub.subTitle}</div>
+                            <div class="rule-detail">${sub.detail}</div>
+                        </div>
+                    `).join('');
+                    contentHtml = `<div class="sub-category-list">${subsHtml}</div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="rule-header">
+                        <div class="rule-num">${rule.id}</div>
+                        <div class="rule-title">${rule.title}</div>
+                    </div>
+                    ${contentHtml}
+                `;
+                listView.appendChild(card);
+            });
+            totalCount.innerText = filteredData.length;
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            filteredData = changingRulesData.filter(r => {
+                const titleMatch = r.title.toLowerCase().includes(val);
+                let subMatch = false;
+                if (r.type === "table") {
+                    subMatch = r.rows.some(row => 
+                        row.context.toLowerCase().includes(val) ||
+                        row.simple.toLowerCase().includes(val) ||
+                        row.complex.toLowerCase().includes(val) ||
+                        row.compound.toLowerCase().includes(val)
+                    );
+                } else {
+                    subMatch = r.subs.some(s => 
+                        s.subTitle.toLowerCase().includes(val) ||
+                        s.detail.toLowerCase().includes(val)
+                    );
+                }
+                return titleMatch || subMatch;
+            });
+            renderRules();
+            flashcardIndex = 0;
+            updateFlashcard();
+        });
+
+        function switchView(view) {
+            document.getElementById('viewListBtn').classList.toggle('active', view === 'list');
+            document.getElementById('viewCardBtn').classList.toggle('active', view === 'flashcard');
+            document.getElementById('viewQuizBtn').classList.toggle('active', view === 'quiz');
+
+            listView.style.display = view === 'list' ? 'flex' : 'none';
+            shortcutCard.style.display = view === 'list' ? 'block' : 'none';
+            flashcardWrapper.style.display = view === 'flashcard' ? 'block' : 'none';
+            flashcardControls.style.display = view === 'flashcard' ? 'flex' : 'none';
+            quizWrapper.style.display = view === 'quiz' ? 'block' : 'none';
+
+            if (view === 'flashcard') updateFlashcard();
+            if (view === 'quiz') startQuiz();
+        }
+
+        // Flashcards
+        function updateFlashcard() {
+            if (filteredData.length === 0) return;
+            const item = filteredData[flashcardIndex];
+            document.getElementById('flashcard').classList.remove('flipped');
+            setTimeout(() => {
+                document.getElementById('fcTitle').innerText = item.title;
+                document.getElementById('fcBackTitle').innerText = item.title;
+                
+                let html = "";
+                if (item.type === "table") {
+                    html = item.rows.map(r => `
+                        <div style="margin-bottom:0.8rem;">
+                            <strong style="color:var(--primary);">${r.context}:</strong><br>
+                            <small>Simple: ${r.simple}</small><br>
+                            <small>Complex: ${r.complex}</small><br>
+                            <small>Compound: ${r.compound}</small>
+                        </div>
+                    `).join('');
+                } else {
+                    html = item.subs.map(s => `
+                        <div style="margin-bottom:0.8rem;">
+                            <strong style="color:var(--text-main);">${s.subTitle}:</strong><br>
+                            <span style="color:var(--primary); font-weight:600;">${s.detail}</span>
+                        </div>
+                    `).join('');
+                }
+
+                document.getElementById('fcContent').innerHTML = html;
+                document.getElementById('fcProgress').innerText = `${flashcardIndex + 1} / ${filteredData.length}`;
+            }, 200);
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            if (filteredData.length === 0) return;
+            flashcardIndex = (flashcardIndex + 1) % filteredData.length;
+            updateFlashcard();
+        }
+
+        function prevCard() {
+            if (filteredData.length === 0) return;
+            flashcardIndex = (flashcardIndex - 1 + filteredData.length) % filteredData.length;
+            updateFlashcard();
+        }
+
+        // Quiz
+        function startQuiz() {
+            quizIndex = 0;
+            score = 0;
+            document.getElementById('quizScore').innerText = `স্কোর: ${score}`;
+            showQuizQuestion();
+        }
+
+        function showQuizQuestion() {
+            const item = changingRulesData[quizIndex];
+            document.getElementById('quizIndex').innerText = quizIndex + 1;
+            document.getElementById('quizTotal').innerText = changingRulesData.length;
+            document.getElementById('quizQuestion').innerText = item.quizQ;
+            document.getElementById('nextQuizBtn').style.display = "none";
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = "";
+
+            item.quizOpts.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(btn, opt, item.correctOpt);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selectedBtn, selectedOpt, correctOpt) {
+            const buttons = document.querySelectorAll('.quiz-opt-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedOpt === correctOpt) {
+                selectedBtn.classList.add('correct');
+                score++;
+                document.getElementById('quizScore').innerText = `স্কোর: ${score}`;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons.forEach(btn => {
+                    if (btn.innerText === correctOpt) btn.classList.add('correct');
+                });
+            }
+            document.getElementById('nextQuizBtn').style.display = "block";
+        }
+
+        function nextQuiz() {
+            quizIndex = (quizIndex + 1) % changingRulesData.length;
+            showQuizQuestion();
+        }
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        });
+
+        // Initialize
+        renderRules();
+    </script>
+</body>
+</html>
