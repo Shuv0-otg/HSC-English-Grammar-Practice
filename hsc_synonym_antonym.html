@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+    <script>
+        (function () {
+            var savedTheme = localStorage.getItem('hsc-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme-pending', 'dark');
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSC Board Synonyms & Antonyms (2015–2025)</title>
@@ -386,6 +394,7 @@
     </style>
 </head>
 <body>
+    <script>if (document.documentElement.getAttribute('data-theme-pending') === 'dark') { document.body.setAttribute('data-theme', 'dark'); }</script>
 
     <header>
         <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
@@ -720,7 +729,9 @@
         // Theme Toggle
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.getAttribute('data-theme') === 'dark';
-            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('hsc-theme', newTheme);
         });
 
         // Initialize
